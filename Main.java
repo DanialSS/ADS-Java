@@ -29,7 +29,6 @@ public class Main {
 
         way = in.next();
         if (way.equals("add")){
-            Scanner input = new Scanner(System.in);
             while (true) {
                 System.out.println("Enter name:");
                 name = in.next();
@@ -48,12 +47,18 @@ public class Main {
 
         if (way.equals("remove")) {
             while (true) {
-                System.out.println("Enter id:");
-                id = Integer.valueOf(in.next());
-                TennisClub.remove(id, name);
+                System.out.println("Enter name:");
+                name = in.next();
                 if (name.equals("end")) {
                     break;
                 }
+                // search for the id corresponding to input name.
+                for (Map.Entry<Integer, String> entry : TennisClub.entrySet()) {
+                    if (entry.getValue().equals(name)) {
+                        id = entry.getKey();
+                    }
+                }
+                TennisClub.remove(id, name);
             }
             System.out.println("\nHashtable:");
             for (Integer n : TennisClub.keySet()) {
